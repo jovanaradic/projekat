@@ -9,7 +9,8 @@
     <Grid>
         <TabControl>
             <TabItem Header="Tab1">
-                <TextBlock Text="Jovana 11 Gorica"></TextBlock>
+
+                <TextBlock Text="Jovana 111"></TextBlock>
             </TabItem>
             <TabItem Header="Tab2"></TabItem>
             <TabItem Header="Tab3"></TabItem>
