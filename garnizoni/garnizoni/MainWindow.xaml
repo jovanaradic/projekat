@@ -8,7 +8,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <TabControl>
-            <TabItem Header="Tab1"></TabItem>
+            <TabItem Header="Tab1">
+                <TextBlock Text="Jovana"></TextBlock>
+            </TabItem>
             <TabItem Header="Tab2"></TabItem>
             <TabItem Header="Tab3"></TabItem>
         </TabControl>
