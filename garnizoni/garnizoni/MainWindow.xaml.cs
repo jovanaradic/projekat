@@ -20,7 +20,6 @@ namespace garnizoni
         {
             InitializeComponent();
         }
-
         private void ListView_MouseMove(object sender, MouseEventArgs e)
         {
 
