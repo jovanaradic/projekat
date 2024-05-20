@@ -25,5 +25,20 @@ namespace garnizoni
         {
 
         }
+
+        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void ListView_DragEnter(object sender, DragEventArgs e)
+        {
+
+        }
+
+        private void ListView_Drop(object sender, DragEventArgs e)
+        {
+
+        }
     }
 }
