@@ -20,38 +20,22 @@ namespace garnizoni
         {
             InitializeComponent();
         }
-
-        private void btnDodajGarnizon_Click(object sender, RoutedEventArgs e)
+        private void ListView_MouseMove(object sender, MouseEventArgs e)
         {
 
         }
 
-        private void btnIzmijeniGarnizon_Click(object sender, RoutedEventArgs e)
+        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
 
         }
 
-        private void btnObrisiGarnizon_Click(object sender, RoutedEventArgs e)
+        private void ListView_DragEnter(object sender, DragEventArgs e)
         {
 
         }
 
-        private void btnDodajJedinicu_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnIzmijeniJedinicu_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnObrisiJedinicu_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Garnizoni_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListView_Drop(object sender, DragEventArgs e)
         {
 
         }

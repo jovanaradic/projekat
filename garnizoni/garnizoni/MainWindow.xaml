@@ -65,9 +65,44 @@
                     </Grid>
                 </Grid>
             </TabItem>
+            
+            
             <TabItem Header="Tab2">
-                <TextBlock> Gorica</TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <ComboBox Grid.Column="0" Grid.Row="0" Margin="20 25">
+                        
+                    </ComboBox>
+
+                    <ComboBox Grid.Column="1" Grid.Row="0" Margin="20 25">
+
+                    </ComboBox>
+
+                    <ListView  Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Jedinice}" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
+                        <ListViewItem></ListViewItem>
+                    </ListView>
+
+                    <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Jedinica}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    
+                </Grid>
             </TabItem>
+            
+            
             <TabItem Header="Tab3"></TabItem>
         </TabControl>
 
