@@ -9,7 +9,61 @@
     <Grid>
         <TabControl>
             <TabItem Header="Tab1">
-                <TextBlock Text="Jovana 111 novooo sa goricom"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="Izbor garnizona" Margin="10" FontSize="15" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.Row="0"/>
+                        <TextBox Grid.Column="0" Grid.Row="1" Margin="10 30"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Margin="30" Padding="20">
+                            <ComboBoxItem Content="Beograd"></ComboBoxItem>
+                            <ComboBoxItem Content="Novi Sad"></ComboBoxItem>
+                            <ComboBoxItem Content="Nis"></ComboBoxItem>
+                            <ComboBoxItem Content="Kraljevo"></ComboBoxItem>
+                            <ComboBoxItem Content="Valjevo"></ComboBoxItem>
+                            <ComboBoxItem Content="Vranje"></ComboBoxItem>
+                            <ComboBoxItem Content="Pancevo"></ComboBoxItem>
+                            <ComboBoxItem Content="Sombor"></ComboBoxItem>
+                            <ComboBoxItem Content="Zajecar"></ComboBoxItem>
+                            <ComboBoxItem Content="Subotica"></ComboBoxItem>
+                            <ComboBoxItem Content="Uzice"></ComboBoxItem>
+                            <ComboBoxItem Content="Samostalan"></ComboBoxItem>
+                        </ComboBox>
+                    </Grid>
+                    <ListBox Grid.Column="0" Grid.Row="1" Name="lbGarnizoni" 
+                 MouseDoubleClick="Garnizoni_MouseDoubleClick" Margin="10"></ListBox>
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="10">
+                        <Button Name="btnDodajGarnizon" Content="Dodaj garnizon" Click="btnDodajGarnizon_Click" Margin="30 10 30 5"/>
+                        <Button Name="btnIzmijeniGarnizon" Content="Izmijeni garnizon" Click="btnIzmijeniGarnizon_Click" Margin="30 5 30 5"/>
+                        <Button Name="btnObrisiGarnizon" Content="Obrisi garnizon" Click="btnObrisiGarnizon_Click" Margin="30 5 30 10"/>
+                    </StackPanel>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <ListBox Grid.Row="0" Name="lbJedinice" Margin="10"></ListBox>
+                        <StackPanel Grid.Row="1">
+                            <Button Name="btnDodajJedinicu" Content="Dodaj jedinicu" Click="btnDodajJedinicu_Click" Margin="30 10 30 5"/>
+                            <Button Name="btnIzmijeniJedinicu" Content="Izmijeni jedinicu" Click="btnIzmijeniJedinicu_Click" Margin="30 5 30 5"/>
+                            <Button Name="btnObrisiJedinicu" Content="Obrisi jedinicu" Click="btnObrisiJedinicu_Click" Margin="30 5 30 10"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
             </TabItem>
             <TabItem Header="Tab2">
                 <TextBlock> Gorica</TextBlock>
