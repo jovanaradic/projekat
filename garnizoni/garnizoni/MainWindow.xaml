@@ -78,16 +78,39 @@
                         <RowDefinition Height="4*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" Margin="20 25">
+                    <ComboBox Name="cbLijevi" Grid.Column="0" Grid.Row="0" Margin="20 25">
+                    </ComboBox>
+
+                    <ComboBox Name="cbDesni" Grid.Column="1" Grid.Row="0" Margin="20 25">
 
                     </ComboBox>
 
-                    <ComboBox Grid.Column="1" Grid.Row="0" Margin="20 25">
-
-                    </ComboBox>
-
-                    <ListView  Grid.Column="0" Grid.Row="1" ItemsSource="{Binding Jedinice}" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove">
-                        <ListViewItem></ListViewItem>
+                    <ListView  Grid.Column="0" Grid.Row="1" x:Name="lw_lijeva" Margin="5 0 20 5" ItemsSource="{Binding Lijeve_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Naziv" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Naziv}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Adresa" Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Adresa}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Ikonica" Width="50">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Ikonica}" Width="20" Height="20"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
                     </ListView>
 
                     <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Jedinica}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop">
@@ -96,6 +119,33 @@
 
                             </DataTemplate>
                         </ListView.ItemTemplate>
+
+                    <ListView Grid.Column="1" Grid.Row="1" x:Name="lw_desna" Margin="20 0 5 5 " ItemsSource="{Binding Desne_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Naziv" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Naziv}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Adresa" Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Adresa}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Ikonica" Width="50">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Ikonica}" Width="20" Height="20"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
                     </ListView>
 
                 </Grid>
