@@ -29,10 +29,7 @@ namespace garnizoni
 
             garnizoni = new ObservableCollection<Garnizon>();
             ucitajGarnizone("garnizoni.txt", garnizoni);
-            foreach(var ga in garnizoni)
-            {
-                MessageBox.Show(ga.Naziv);
-            }
+
             selekcijaGarnizona.ItemsSource = garnizoni;
 
         }
