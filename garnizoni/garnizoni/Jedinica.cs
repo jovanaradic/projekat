@@ -9,20 +9,19 @@ using System.Windows.Media.Imaging;
 
 namespace garnizoni
 {
-    class Jedinica : INotifyPropertyChanged
+    public class Jedinica : INotifyPropertyChanged
     {
         string naziv;
         private string adresa;
-        private Image ikonica;
+        private string putanja_ikonica;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public Jedinica(string naziv, string adresa, string putanja)
+        public Jedinica(string naziv, string adresa, string putanja_ikonica)
         {
             this.naziv = naziv;
             this.adresa = adresa;
-            this.ikonica = new Image();
-            ikonica.Source = new BitmapImage(new Uri(putanja));
+            this.putanja_ikonica = putanja_ikonica;
         }
         public string Naziv
         {
@@ -50,15 +49,15 @@ namespace garnizoni
             }
         }
 
-        public Image Ikonica
+        public string Putanja
         {
-            get { return this.ikonica; }
+            get { return this.putanja_ikonica; }
             set
             {
-                if (this.ikonica != value)
+                if (this.putanja_ikonica != value)
                 {
-                    this.ikonica = value;
-                    this.NotifyPropertyChanged("Ikonica");
+                    this.putanja_ikonica = value;
+                    this.NotifyPropertyChanged("Putanja");
                 }
             }
         }
