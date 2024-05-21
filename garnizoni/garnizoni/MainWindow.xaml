@@ -11,29 +11,27 @@
             <TabItem Header="Tab1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="62*"/>
-                        <ColumnDefinition Width="335*"/>
-                        <ColumnDefinition Width="397*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
-                    <Grid Grid.Column="0" Grid.Row="0" Margin="6,6,6,6" Grid.ColumnSpan="2">
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="6">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60*"/>
-                            <ColumnDefinition Width="17*"/>
-                            <ColumnDefinition Width="308*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="2*"/>
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Izbor garnizona" Margin="10,10,10,10" FontSize="15" FontWeight="DemiBold" Grid.ColumnSpan="3" Grid.Row="0"/>
-                        <Image Grid.Row="1" Grid.Column="0" Margin="20,20,3,20"/>
-                        <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" DisplayMemberPath="Naziv" SelectionChanged="selecijaGarnizona_selectionChanged" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Margin="20,0,20,0" Padding="5"/>
+                        <TextBlock Text="Izbor garnizona" Margin="10" FontSize="15" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.Row="0"/>
+                        <Image Grid.Row="1" Source="/images/beograd_garnizon.jpg" Grid.Column="0" Margin="20"/> 
+                        <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" DisplayMemberPath="Naziv" SelectionChanged="selecijaGarnizona_selectionChanged" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 5" Padding="5"/>
                     </Grid>
-                    <ListView Grid.Column="0" Grid.Row="1" Margin="20,20,20,20" Grid.ColumnSpan="2">
+                    <ListView Grid.Column="0" Grid.Row="1" Margin="20">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -45,12 +43,12 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <StackPanel Grid.Column="2" Margin="30,0,30,0" VerticalAlignment="Center">
+                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="30 10" VerticalAlignment="Center">
                         <Button Name="btnDodajGarnizon" Content="Dodaj garnizon" Click="btnDodajGarnizon_Click" Margin="30 10 30 5"/>
                         <Button Name="btnIzmijeniGarnizon" Content="Izmijeni garnizon" Click="btnIzmijeniGarnizon_Click" Margin="30 5 30 5"/>
                         <Button Name="btnObrisiGarnizon" Content="Obrisi garnizon" Click="btnObrisiGarnizon_Click" Margin="30 5 30 10"/>
                     </StackPanel>
-                    <Grid Grid.Column="2" Grid.Row="1" Margin="20,20,20,20">
+                    <Grid Grid.Column="1" Grid.Row="1" Margin="20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"/>
                             <RowDefinition Height="2*"/>
@@ -64,8 +62,8 @@
                     </Grid>
                 </Grid>
             </TabItem>
-
-
+            
+            
             <TabItem Header="Tab2">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -79,6 +77,7 @@
                     </Grid.RowDefinitions>
 
                     <ComboBox Name="cbLijevi" Grid.Column="0" Grid.Row="0" Margin="20 25">
+                        
                     </ComboBox>
 
                     <ComboBox Name="cbDesni" Grid.Column="1" Grid.Row="0" Margin="20 25">
@@ -113,13 +112,6 @@
                         </ListView.View>
                     </ListView>
 
-                    <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Jedinica}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-
                     <ListView Grid.Column="1" Grid.Row="1" x:Name="lw_desna" Margin="20 0 5 5 " ItemsSource="{Binding Desne_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
                         <ListView.View>
                             <GridView>
@@ -147,11 +139,11 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
-
+                    
                 </Grid>
             </TabItem>
-
-
+            
+            
             <TabItem Header="Tab3"></TabItem>
         </TabControl>
 
