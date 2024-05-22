@@ -104,7 +104,7 @@
                                 <GridViewColumn Header="Ikonica" Width="50">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Ikonica}" Width="20" Height="20"/>
+                                            <Image Source="{Binding Putanja}" Width="20" Height="20"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -132,7 +132,7 @@
                                 <GridViewColumn Header="Ikonica" Width="50">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding Ikonica}" Width="20" Height="20"/>
+                                            <Image Source="{Binding Putanja}" Width="20" Height="20"/>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>

@@ -18,6 +18,11 @@ namespace garnizoni
         private string adresa;
         private string putanja_ikonica;
 
+        public ObservableCollection<Jedinica> jedinice
+        {
+            get;
+            set;
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -28,10 +33,12 @@ namespace garnizoni
             this.naziv = naziv;
             this.adresa = adresa;
             this.putanja_ikonica = putanja_ikonica;
+            this.jedinice = new ObservableCollection<Jedinica>();
         }
 
         public Garnizon()
         {
+            jedinice = new ObservableCollection<Jedinica>();
         }
 
         public int Id
