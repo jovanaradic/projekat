@@ -11,7 +11,7 @@ namespace garnizoni
 {
     public class Jedinica : INotifyPropertyChanged
     {
-        string naziv;
+        private string naziv;
         private string adresa;
         private string putanja_ikonica;
 
