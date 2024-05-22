@@ -28,17 +28,14 @@
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Izbor garnizona" Margin="10" FontSize="15" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.Row="0"/>
-                        <Image Grid.Row="1" Source="./images/beograd_garnizon.jpg" Grid.Column="0" Margin="20"/> 
-                        <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" DisplayMemberPath="Naziv" SelectionChanged="selecijaGarnizona_selectionChanged" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 5" Padding="5"/>
+                        <Image Grid.Row="1" Source="{Binding SelektovaniGarnizon.Putanja}" Grid.Column="0" Margin="20"/> 
+                        <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" SelectedItem="{Binding SelektovaniGarnizon}" DisplayMemberPath="Naziv" SelectionChanged="selecijaGarnizona_selectionChanged" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 5" Padding="5"/>
                     </Grid>
-                    <ListView Grid.Column="0" Grid.Row="1" Margin="20">
+                    <ListView ItemsSource="{Binding SelektovaniGarnizon.jedinice}" Grid.Column="0" Grid.Row="1" Margin="20">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <ListViewItem Content="{Binding Id}"></ListViewItem>
                                     <ListViewItem Content="{Binding Naziv}"></ListViewItem>
-                                    <ListViewItem Content="{Binding Adresa}"></ListViewItem>
-                                    <Image Source="{Binding Putanja}" Width="50" Height="50"></Image>
                                 </StackPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>

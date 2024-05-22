@@ -20,7 +20,23 @@ namespace garnizoni
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+
         public ObservableCollection<Garnizon> garnizoni { get; set; }
+
+        private Garnizon selektovaniGarnizon;
+
+        public Garnizon SelektovaniGarnizon
+        {
+            get
+            {
+                return selektovaniGarnizon;
+            }
+            set
+            {
+                selektovaniGarnizon = value;
+                this.NotifyPropertyChanged("SelektovaniGarnizon");
+            }
+        }
 
 
         public MainWindow()
@@ -31,6 +47,7 @@ namespace garnizoni
             garnizoni = new ObservableCollection<Garnizon>();
             ucitajGarnizone("garnizoni.txt", garnizoni);
             ucitajJedinice("jedinice.txt");
+
 
         }
 
