@@ -73,15 +73,15 @@
                         <RowDefinition Height="4*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Name="cbLijevi" Grid.Column="0" Grid.Row="0" Margin="20 25">
+                    <ComboBox Name="cbLijevi" ItemsSource="{Binding garnizoni}" DisplayMemberPath="Naziv" Grid.Column="0" Grid.Row="0" Margin="20 25">
                         
                     </ComboBox>
 
-                    <ComboBox Name="cbDesni" Grid.Column="1" Grid.Row="0" Margin="20 25">
+                    <ComboBox Name="cbDesni" ItemsSource="{Binding garnizoni}" DisplayMemberPath="Naziv" Grid.Column="1" Grid.Row="0" Margin="20 25">
 
                     </ComboBox>
 
-                    <ListView  Grid.Column="0" Grid.Row="1" x:Name="lw_lijeva" Margin="5 0 20 5" ItemsSource="{Binding Lijeve_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
+                    <ListView  Grid.Column="0" Grid.Row="1" x:Name="lw_lijeva" Margin="5 0 20 5" SelectionMode="Single" ItemsSource="{Binding Lijeve_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Naziv" Width="100">
@@ -109,7 +109,7 @@
                         </ListView.View>
                     </ListView>
 
-                    <ListView Grid.Column="1" Grid.Row="1" x:Name="lw_desna" Margin="20 0 5 5 " ItemsSource="{Binding Desne_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
+                    <ListView Grid.Column="1" Grid.Row="1" x:Name="lw_desna" Margin="20 0 5 5 " SelectionMode="Single" ItemsSource="{Binding Desne_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Naziv" Width="100">
