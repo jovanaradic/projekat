@@ -62,8 +62,6 @@ namespace garnizoni
             }
         }
 
-
-
         private void NotifyPropertyChanged(string v)
         {
             if (this.PropertyChanged != null)
