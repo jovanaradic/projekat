@@ -31,15 +31,15 @@
                         <Image Name="slikaGarnizona" Source="{Binding SelektovaniGarnizon.Putanja}" Grid.Row="1" Grid.Column="0" Margin="10"/> 
                         <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" SelectedItem="{Binding SelektovaniGarnizon}" DisplayMemberPath="Naziv" SelectionChanged="selecijaGarnizona_selectionChanged" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 5" Padding="5"/>
                     </Grid>
-                    <ListView Name="lvJedinice" ItemsSource="{Binding SelektovaniGarnizon.jedinice}" SelectionChanged="lvJedinice_SelectionChanged" Grid.Column="0" Grid.Row="1" Margin="20">
-                        <ListView.ItemTemplate>
+                    <ListBox Name="lvJedinice" ItemsSource="{Binding SelektovaniGarnizon.jedinice}" SelectionChanged="lvJedinice_SelectionChanged" Grid.Column="0" Grid.Row="1" Margin="20">
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <ListViewItem Content="{Binding Naziv}"></ListViewItem>
+                                    <TextBlock Text="{Binding Naziv}"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                     <StackPanel Grid.Column="1" Grid.Row="0" Margin="30 10" VerticalAlignment="Center">
                         <Button Name="btnDodajGarnizon" Content="Dodaj garnizon" Click="btnDodajGarnizon_Click" Margin="30 10 30 5"/>
                         <Button Name="btnIzmijeniGarnizon" Content="Izmijeni garnizon" Click="btnIzmijeniGarnizon_Click" Margin="30 5 30 5"/>
