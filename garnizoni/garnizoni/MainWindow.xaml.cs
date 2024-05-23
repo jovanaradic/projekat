@@ -20,6 +20,7 @@ namespace garnizoni
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        Point startPoint = new Point();
 
         public ObservableCollection<Garnizon> garnizoni { get; set; }
 
@@ -38,6 +39,36 @@ namespace garnizoni
             }
         }
 
+        private Garnizon selektovaniGarnizon_lijevi;
+
+        public Garnizon SelektovaniGarnizon_lijevi
+        {
+            get
+            {
+                return selektovaniGarnizon_lijevi;
+            }
+            set
+            {
+                selektovaniGarnizon_lijevi = value;
+                this.NotifyPropertyChanged("SelektovaniGarnizon_lijevi");
+            }
+        }
+
+        private Garnizon selektovaniGarnizon_desni;
+
+        public Garnizon SelektovaniGarnizon_desni
+        {
+            get
+            {
+                return selektovaniGarnizon_desni;
+            }
+            set
+            {
+                selektovaniGarnizon_desni = value;
+                this.NotifyPropertyChanged("SelektovaniGarnizon_desni");
+            }
+        }
+
 
         public MainWindow()
         {
@@ -46,7 +77,8 @@ namespace garnizoni
 
             garnizoni = new ObservableCollection<Garnizon>();
             ucitajGarnizone("garnizoni.txt", garnizoni);
-            ucitajJedinice("jedinice.txt");
+            ucitajJedinice("jedinice.txt", garnizoni);
+
 
 
         }
@@ -94,7 +126,7 @@ namespace garnizoni
             }
         }
 
-        private void ucitajJedinice(string putanja)
+        private void ucitajJedinice(string putanja, ObservableCollection<Garnizon> g)
         {
             StreamReader sr = null;
             string linija = "";
@@ -107,7 +139,7 @@ namespace garnizoni
                     string[] dijelovi = linija.Split('|');
                     string garnizon = dijelovi[0];
 
-                    foreach(var ga in garnizoni)
+                    foreach(var ga in g)
                     {
                         if(ga.Naziv == garnizon)
                         {
@@ -134,24 +166,128 @@ namespace garnizoni
             }
         }
 
-        private void ListView_MouseMove(object sender, MouseEventArgs e)
-        {
+        
 
+        private void lw_desna_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                ListView listView = sender as ListView;
+                ListViewItem listViewItem = FindAnchestor<ListViewItem>((DependencyObject)e.OriginalSource);
+
+                if (listViewItem == null) return;
+
+                Jedinica jedinica = (Jedinica)listView.ItemContainerGenerator.ItemFromContainer(listViewItem);
+                if (jedinica == null) return;
+
+                DataObject dragData = new DataObject("myFormat", jedinica);
+                DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
+            }
         }
 
-        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private static T FindAnchestor<T>(DependencyObject current) where T : DependencyObject
         {
+            do
+            {
+                if (current is T)
+                {
+                    return (T)current;
+                }
 
+                current = VisualTreeHelper.GetParent(current);
+
+            } while (current != null);
+            return null;
         }
 
-        private void ListView_DragEnter(object sender, DragEventArgs e)
+        private void lw_desna_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            startPoint = e.GetPosition(null);
         }
 
-        private void ListView_Drop(object sender, DragEventArgs e)
+        private void lw_desna_DragEnter(object sender, DragEventArgs e)
         {
+            if (!e.Data.GetDataPresent("myFormat") || sender == e.Source)
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
 
+        private void lw_desna_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("myFormat"))
+            {
+                Jedinica jedinica = e.Data.GetData("myFormat") as Jedinica;
+                if (jedinica != null)
+                {
+                    SelektovaniGarnizon_lijevi.jedinice.Remove(jedinica);
+                    SelektovaniGarnizon_desni.jedinice.Add(jedinica);
+                }
+
+                   
+
+            }
+           
+        }
+
+        
+
+        private void lw_lijeva_DragEnter(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent("myFormat") || sender == e.Source)
+            {
+                e.Effects = DragDropEffects.None;
+            }
+        }
+
+        private void lw_lijeva_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent("myFormat"))
+            {
+                Jedinica jedinica = e.Data.GetData("myFormat") as Jedinica;
+                if(jedinica != null)
+                {
+
+                    SelektovaniGarnizon_desni.jedinice.Remove(jedinica);
+                    SelektovaniGarnizon_lijevi.jedinice.Add(jedinica);
+                    
+                }
+
+
+            }
+            
+        }
+
+        private void lw_lijeva_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+        }
+
+        private void lw_lijeva_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                ListView listView = sender as ListView;
+                ListViewItem listViewItem = FindAnchestor<ListViewItem>((DependencyObject)e.OriginalSource);
+
+                if (listViewItem == null) return;
+
+                Jedinica jedinica = (Jedinica)listView.ItemContainerGenerator.ItemFromContainer(listViewItem);
+                if (jedinica == null) return;
+
+                DataObject dragData = new DataObject("myFormat", jedinica);
+                DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
+            }
         }
 
         private void btnDodajGarnizon_Click(object sender, RoutedEventArgs e)
@@ -192,6 +328,24 @@ namespace garnizoni
         private void selecijaGarnizona_selectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void cbLijevi_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selektovaniGarnizon_lijevi = cbLijevi.SelectedItem as Garnizon;
+            if (selektovaniGarnizon_lijevi != null)
+            {
+                lw_lijeva.ItemsSource = selektovaniGarnizon_lijevi.jedinice;
+            }
+        }
+
+        private void cbDesni_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            selektovaniGarnizon_desni = cbDesni.SelectedItem as Garnizon;
+            if (selektovaniGarnizon_desni != null)
+            {
+                lw_desna.ItemsSource = selektovaniGarnizon_desni.jedinice;
+            }
         }
     }
 }
