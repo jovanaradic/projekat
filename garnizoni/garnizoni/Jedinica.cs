@@ -17,6 +17,8 @@ namespace garnizoni
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
+        
+
         public Jedinica(string naziv, string adresa, string putanja_ikonica)
         {
             this.naziv = naziv;

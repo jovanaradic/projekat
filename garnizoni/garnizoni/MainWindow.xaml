@@ -83,18 +83,18 @@
                         <RowDefinition Height="4*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Name="cbLijevi" ItemsSource="{Binding garnizoni}" DisplayMemberPath="Naziv" Grid.Column="0" Grid.Row="0" Margin="20 25">
+                    <ComboBox Name="cbLijevi" SelectionChanged="cbLijevi_SelectionChanged" ItemsSource="{Binding garnizoni}" SelectedItem="{Binding SelektovaniGarnizon_lijevi}" DisplayMemberPath="Naziv" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Margin="20 25">
                         
                     </ComboBox>
 
-                    <ComboBox Name="cbDesni" ItemsSource="{Binding garnizoni}" DisplayMemberPath="Naziv" Grid.Column="1" Grid.Row="0" Margin="20 25">
+                    <ComboBox Name="cbDesni" SelectionChanged="cbDesni_SelectionChanged" ItemsSource="{Binding garnizoni}" SelectedItem="{Binding SelektovaniGarnizon_desni}" DisplayMemberPath="Naziv" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="20 25">
 
                     </ComboBox>
 
-                    <ListView  Grid.Column="0" Grid.Row="1" x:Name="lw_lijeva" Margin="5 0 20 5" SelectionMode="Single" ItemsSource="{Binding Lijeve_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
+                    <ListView  Grid.Column="0" Grid.Row="1" x:Name="lw_lijeva" Margin="10 0 20 10" SelectionMode="Single" ItemsSource="{Binding SelektovaniGarnizon_lijevi.jedinice}" AllowDrop="True" DragEnter="lw_lijeva_DragEnter" Drop="lw_lijeva_Drop" PreviewMouseLeftButtonDown="lw_lijeva_PreviewMouseLeftButtonDown" MouseMove="lw_lijeva_MouseMove" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Naziv" Width="100">
+                                <GridViewColumn Header="Naziv" Width="150">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Naziv}"/>
@@ -119,10 +119,10 @@
                         </ListView.View>
                     </ListView>
 
-                    <ListView Grid.Column="1" Grid.Row="1" x:Name="lw_desna" Margin="20 0 5 5 " SelectionMode="Single" ItemsSource="{Binding Desne_jed}" AllowDrop="True" DragEnter="ListView_DragEnter" Drop="ListView_Drop" PreviewMouseLeftButtonDown="ListView_PreviewMouseLeftButtonDown" MouseMove="ListView_MouseMove" >
+                    <ListView Grid.Column="1" Grid.Row="1" x:Name="lw_desna" Margin="20 0 10 10 " SelectionMode="Single" ItemsSource="{Binding SelektovaniGarnizon_desni.jedinice}" AllowDrop="True" DragEnter="lw_desna_DragEnter" Drop="lw_desna_Drop" PreviewMouseLeftButtonDown="lw_desna_PreviewMouseLeftButtonDown" MouseMove="lw_desna_MouseMove" >
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Naziv" Width="100">
+                                <GridViewColumn Header="Naziv" Width="150">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Naziv}"/>
