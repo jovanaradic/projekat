@@ -28,10 +28,10 @@
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
                         <TextBlock Text="Izbor garnizona" Margin="10" FontSize="15" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.Row="0"/>
-                        <Image Grid.Row="1" Source="{Binding SelektovaniGarnizon.Putanja}" Grid.Column="0" Margin="20"/> 
+                        <Image Name="slikaGarnizona" Source="{Binding SelektovaniGarnizon.Putanja}" Grid.Row="1" Grid.Column="0" Margin="10"/> 
                         <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" SelectedItem="{Binding SelektovaniGarnizon}" DisplayMemberPath="Naziv" SelectionChanged="selecijaGarnizona_selectionChanged" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 5" Padding="5"/>
                     </Grid>
-                    <ListView ItemsSource="{Binding SelektovaniGarnizon.jedinice}" Grid.Column="0" Grid.Row="1" Margin="20">
+                    <ListView Name="lvJedinice" ItemsSource="{Binding SelektovaniGarnizon.jedinice}" SelectionChanged="lvJedinice_SelectionChanged" Grid.Column="0" Grid.Row="1" Margin="20">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -50,7 +50,17 @@
                             <RowDefinition Height="3*"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <ListBox Grid.Row="0" Name="lbJedinice" Margin="10 0 10 15"></ListBox>
+                        <ListView Name="lvSelektovanaJedinica" Grid.Row="0" Margin="10 0 10 15">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ListViewItem Content="{Binding Naziv}"></ListViewItem>
+                                        <ListViewItem Content="{Binding Adresa}"></ListViewItem>
+                                        <Image Source="{Binding Putanja}" Width="50" Height="50"></Image>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                         <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="10 0">
                             <Button Name="btnDodajJedinicu" Content="Dodaj jedinicu" Click="btnDodajJedinicu_Click" Margin="30 10 30 5"/>
                             <Button Name="btnIzmijeniJedinicu" Content="Izmijeni jedinicu" Click="btnIzmijeniJedinicu_Click" Margin="30 5 30 5"/>
