@@ -39,6 +39,7 @@ namespace garnizoni
             }
         }
 
+<<<<<<< tab2
         private Garnizon selektovaniGarnizon_lijevi;
 
         public Garnizon SelektovaniGarnizon_lijevi
@@ -70,6 +71,8 @@ namespace garnizoni
         }
 
 
+=======
+>>>>>>> main
         public MainWindow()
         {
             InitializeComponent();
@@ -78,7 +81,6 @@ namespace garnizoni
             garnizoni = new ObservableCollection<Garnizon>();
             ucitajGarnizone("garnizoni.txt", garnizoni);
             ucitajJedinice("jedinice.txt", garnizoni);
-
 
 
         }
@@ -330,6 +332,7 @@ namespace garnizoni
 
         }
 
+<<<<<<< tab2
         private void cbLijevi_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selektovaniGarnizon_lijevi = cbLijevi.SelectedItem as Garnizon;
@@ -345,6 +348,18 @@ namespace garnizoni
             if (selektovaniGarnizon_desni != null)
             {
                 lw_desna.ItemsSource = selektovaniGarnizon_desni.jedinice;
+=======
+        private void lvJedinice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(lvJedinice.SelectedItem != null)
+            {
+                Jedinica j = (Jedinica)lvJedinice.SelectedItem;
+                if(j != null)
+                {
+                    lvSelektovanaJedinica.Items.Clear();
+                    lvSelektovanaJedinica.Items.Add(j);
+                }
+>>>>>>> main
             }
         }
     }

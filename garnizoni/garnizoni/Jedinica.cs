@@ -25,6 +25,12 @@ namespace garnizoni
             this.adresa = adresa;
             this.putanja_ikonica = putanja_ikonica;
         }
+
+        public Jedinica()
+        {
+
+        }
+
         public string Naziv
         {
             get { return this.naziv; }
