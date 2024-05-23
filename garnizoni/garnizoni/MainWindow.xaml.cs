@@ -38,7 +38,6 @@ namespace garnizoni
             }
         }
 
-
         public MainWindow()
         {
             InitializeComponent();
@@ -47,7 +46,6 @@ namespace garnizoni
             garnizoni = new ObservableCollection<Garnizon>();
             ucitajGarnizone("garnizoni.txt", garnizoni);
             ucitajJedinice("jedinice.txt");
-
 
         }
 
@@ -192,6 +190,19 @@ namespace garnizoni
         private void selecijaGarnizona_selectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void lvJedinice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(lvJedinice.SelectedItem != null)
+            {
+                Jedinica j = (Jedinica)lvJedinice.SelectedItem;
+                if(j != null)
+                {
+                    lvSelektovanaJedinica.Items.Clear();
+                    lvSelektovanaJedinica.Items.Add(j);
+                }
+            }
         }
     }
 }
