@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -293,7 +294,8 @@ namespace garnizoni
 
         private void btnDodajGarnizon_Click(object sender, RoutedEventArgs e)
         {
-
+            AddWindow1 addWindow1 = new AddWindow1(garnizoni);
+            addWindow1.ShowDialog();
         }
 
         private void btnIzmijeniGarnizon_Click(object sender, RoutedEventArgs e)
@@ -303,12 +305,36 @@ namespace garnizoni
 
         private void btnObrisiGarnizon_Click(object sender, RoutedEventArgs e)
         {
-
+            Garnizon g = SelektovaniGarnizon;
+            if(g != null)
+            {
+                if (System.Windows.MessageBox.Show("Da li zaizsta zelite da obrisete garnizon?", "Potvrda o brisanju garnizona", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    garnizoni.Remove(g);
+                    if(lvSelektovanaJedinica.Items != null)
+                    {
+                        lvSelektovanaJedinica.Items.Clear();
+                    }
+                    MessageBox.Show("Uspjesno brisanje!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }   
+            }
+            else
+            {
+                MessageBox.Show("Garnizon nije selektovan!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnDodajJedinicu_Click(object sender, RoutedEventArgs e)
         {
-
+            if (SelektovaniGarnizon != null)
+            {
+                AddWindow2 addWindow2 = new AddWindow2(garnizoni, SelektovaniGarnizon);
+                addWindow2.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Garnizon nije selektovan!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnIzmijeniJedinicu_Click(object sender, RoutedEventArgs e)
@@ -318,6 +344,20 @@ namespace garnizoni
 
         private void btnObrisiJedinicu_Click(object sender, RoutedEventArgs e)
         {
+            Jedinica j = lvJedinice.SelectedItem as Jedinica;
+            if (j != null)
+            {
+                if (System.Windows.MessageBox.Show("Da li zaizsta zelite da obrisete jedinicu?", "Potvrda o brisanju jedinice", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    SelektovaniGarnizon.jedinice.Remove(j);
+                    lvSelektovanaJedinica.Items.Clear();
+                    MessageBox.Show("Uspjesno brisanje!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Jedinica nije selektovana!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
