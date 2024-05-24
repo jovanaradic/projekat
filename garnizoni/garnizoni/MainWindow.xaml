@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:garnizoni"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="830">
     <Grid>
         <TabControl>
             <TabItem Header="Tab1">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="7*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -29,17 +29,25 @@
                         </Grid.RowDefinitions>
                         <TextBlock Text="Izbor garnizona" Margin="10" FontSize="15" FontWeight="DemiBold" Grid.ColumnSpan="2" Grid.Row="0"/>
                         <Image Name="slikaGarnizona" Source="{Binding SelektovaniGarnizon.Putanja}" Grid.Row="1" Grid.Column="0" Margin="10"/>
-                        <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" SelectedItem="{Binding SelektovaniGarnizon}" DisplayMemberPath="Naziv" SelectionChanged="selecijaGarnizona_selectionChanged" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 5" Padding="5"/>
+                        <ComboBox Name="selekcijaGarnizona" ItemsSource="{Binding garnizoni}" SelectedItem="{Binding SelektovaniGarnizon}" SelectionChanged="selekcijaGarnizona_SelectionChanged" DisplayMemberPath="Naziv" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Margin="20 5" Padding="5"/>
                     </Grid>
-                    <ListBox Name="lvJedinice" ItemsSource="{Binding SelektovaniGarnizon.jedinice}" SelectionChanged="lvJedinice_SelectionChanged" Grid.Column="0" Grid.Row="1" Margin="20">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Naziv}"></TextBlock>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    <Grid Grid.Row="1" Grid.Column="0" Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="6*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Podaci o izabranom garnizonu: " FontWeight="DemiBold" Grid.Row="0" Margin="10 8 0 0"/>
+
+                        <ListBox Name="lvJedinice" ItemsSource="{Binding SelektovaniGarnizon.jedinice}" SelectionChanged="lvJedinice_SelectionChanged" Grid.Row="1" Margin="10 0 10 15">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Naziv}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
                     <StackPanel Grid.Column="1" Grid.Row="0" Margin="30 10" VerticalAlignment="Center">
                         <Button Name="btnDodajGarnizon" Content="Dodaj garnizon" Click="btnDodajGarnizon_Click" Margin="30 10 30 5"/>
                         <Button Name="btnIzmijeniGarnizon" Content="Izmijeni garnizon" Click="btnIzmijeniGarnizon_Click" Margin="30 5 30 5"/>
@@ -50,17 +58,40 @@
                             <RowDefinition Height="3*"/>
                             <RowDefinition Height="2*"/>
                         </Grid.RowDefinitions>
-                        <ListView Name="lvSelektovanaJedinica" Grid.Row="0" Margin="10 0 10 15">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ListViewItem Content="{Binding Naziv}"></ListViewItem>
-                                        <ListViewItem Content="{Binding Adresa}"></ListViewItem>
-                                        <Image Source="{Binding Putanja}" Width="50" Height="50"></Image>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Label Content="Podaci o selektovanoj jedinici: " FontWeight="DemiBold"/>
+                            <ListView Name="lvSelektovanaJedinica" Grid.Row="1" Margin="0 0 0 15" SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Naziv" Width="165">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Naziv}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Adresa" Width="175">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding Adresa}"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="Ikonica" Width="50">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Image Source="{Binding Putanja}" Width="30" Height="30"/>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
                         <StackPanel Grid.Row="1" VerticalAlignment="Center" Margin="10 0">
                             <Button Name="btnDodajJedinicu" Content="Dodaj jedinicu" Click="btnDodajJedinicu_Click" Margin="30 10 30 5"/>
                             <Button Name="btnIzmijeniJedinicu" Content="Izmijeni jedinicu" Click="btnIzmijeniJedinicu_Click" Margin="30 5 30 5"/>
