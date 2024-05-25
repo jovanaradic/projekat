@@ -27,6 +27,7 @@
     <None Remove="images\nis_garnizon.jpg" />
     <None Remove="images\novisad_garnizon.jpg" />
     <None Remove="images\pancevo.jpg" />
+    <None Remove="images\pancevo_garnizon.jpg" />
     <None Remove="images\raketna_brigada.jpg" />
     <None Remove="images\RV.jpg" />
     <None Remove="images\sombor_garnizon.jpg" />
@@ -59,7 +60,7 @@
     <Resource Include="images\log_bataljon.jpg" />
     <Resource Include="images\nis_garnizon.jpg" />
     <Resource Include="images\novisad_garnizon.jpg" />
-    <Resource Include="images\pancevo.jpg" />
+    <Resource Include="images\pancevo_garnizon.jpg" />
     <Resource Include="images\raketna_brigada.jpg" />
     <Resource Include="images\RV.jpg" />
     <Resource Include="images\sombor_garnizon.jpg" />
@@ -95,7 +96,6 @@
     <Resource Include="images\kraljevo_garnizon.jpg" />
     <Resource Include="images\nis_garnizon.jpg" />
     <Resource Include="images\novisad_garnizon.jpg" />
-    <Resource Include="images\pancevo.jpg" />
     <Resource Include="images\sombor_garnizon.jpg" />
     <Resource Include="images\subotica_garnizon.jpg" />
     <Resource Include="images\uzice_garnizon.jpg" />

@@ -300,6 +300,15 @@ namespace garnizoni
 
         private void btnIzmijeniGarnizon_Click(object sender, RoutedEventArgs e)
         {
+            if (SelektovaniGarnizon != null)
+            {
+                WindowEdit1 windowEdit1 = new WindowEdit1(garnizoni, SelektovaniGarnizon);
+                windowEdit1.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Garnizon nije selektovan!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
         }
 
@@ -316,6 +325,16 @@ namespace garnizoni
                         lvSelektovanaJedinica.Items.Clear();
                     }
                     MessageBox.Show("Uspjesno brisanje!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    foreach(var ga in garnizoni)
+                    {
+                        if(ga.Naziv == "SAMOSTALNE")
+                        {
+                            foreach(var j in g.jedinice)
+                            {
+                                ga.jedinice.Add(j);
+                            }
+                        }
+                    }
                 }   
             }
             else
@@ -333,13 +352,22 @@ namespace garnizoni
             }
             else
             {
-                MessageBox.Show("Garnizon nije selektovan!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Jedinica nije selektovana!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void btnIzmijeniJedinicu_Click(object sender, RoutedEventArgs e)
         {
-
+            Jedinica j = lvJedinice.SelectedItem as Jedinica;
+            if (j != null)
+            {
+                WindowEdit2 windowEdit2 = new WindowEdit2(garnizoni, SelektovaniGarnizon);
+                windowEdit2.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Jedinica nije selektovana!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnObrisiJedinicu_Click(object sender, RoutedEventArgs e)
@@ -360,17 +388,6 @@ namespace garnizoni
             }
 
         }
-
-        private void Garnizoni_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void selecijaGarnizona_selectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
 
         private void cbLijevi_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -401,6 +418,14 @@ namespace garnizoni
                     lvSelektovanaJedinica.Items.Add(j);
                 }
 
+            }
+        }
+
+        private void selekcijaGarnizona_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(selekcijaGarnizona.SelectedItem != null)
+            {
+                lvSelektovanaJedinica.Items.Clear();
             }
         }
     }
