@@ -186,7 +186,72 @@
             </TabItem>
 
 
-            <TabItem Header="Tab3"></TabItem>
+            <TabItem Header="Tab3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="6*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Prikaz svih garnizona: " FontWeight="DemiBold" Margin="10 5 10 0" Padding="4"></Label>
+                        <ListView  Grid.Column="0" x:Name="lwGarnizoniTab3" Margin="10 5 5 20" Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding garnizoni}" AllowDrop="True" DragEnter="lw_lijeva_DragEnter" Drop="lw_lijeva_Drop" PreviewMouseLeftButtonDown="lw_lijeva_PreviewMouseLeftButtonDown" MouseMove="lw_lijeva_MouseMove" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="lwGarnizoniTab3_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Naziv" Width="200">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Naziv}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Ikonica" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Putanja}" Width="30" Height="30"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="6*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Prikaz jedinica selektovanog garnizona: " FontWeight="DemiBold" Margin="10 5 5 0" Padding="4"></Label>
+                        <ListView  Grid.Column="0" x:Name="lwJediniceTab3" Margin="10 5 5 20" Grid.Row="1" SelectionMode="Single" AllowDrop="True" DragEnter="lw_lijeva_DragEnter" Drop="lw_lijeva_Drop" PreviewMouseLeftButtonDown="lw_lijeva_PreviewMouseLeftButtonDown" MouseMove="lw_lijeva_MouseMove" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Naziv" Width="200">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Naziv}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Ikonica" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Image Source="{Binding Putanja}" Width="30" Height="30"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </Grid>
+            </TabItem>
         </TabControl>
 
     </Grid>

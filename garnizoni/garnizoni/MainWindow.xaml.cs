@@ -441,5 +441,14 @@ namespace garnizoni
                 lvSelektovanaJedinica.Items.Clear();
             }
         }
+
+        private void lwGarnizoniTab3_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(lwGarnizoniTab3.SelectedItem != null)
+            {
+                Garnizon g = lwGarnizoniTab3.SelectedItem as Garnizon;
+                lwJediniceTab3.ItemsSource = g.jedinice;
+            }
+        }
     }
 }
