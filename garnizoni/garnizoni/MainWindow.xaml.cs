@@ -227,12 +227,17 @@ namespace garnizoni
                 Jedinica jedinica = e.Data.GetData("myFormat") as Jedinica;
                 if (jedinica != null)
                 {
-                    SelektovaniGarnizon_lijevi.jedinice.Remove(jedinica);
-                    SelektovaniGarnizon_desni.jedinice.Add(jedinica);
+                    if(SelektovaniGarnizon_desni != null)
+                    {
+
+                        SelektovaniGarnizon_lijevi.jedinice.Remove(jedinica);
+                        SelektovaniGarnizon_desni.jedinice.Add(jedinica);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Oba garnizona moraju biti selektovana!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-
-                   
-
             }
            
         }
@@ -254,9 +259,17 @@ namespace garnizoni
                 Jedinica jedinica = e.Data.GetData("myFormat") as Jedinica;
                 if(jedinica != null)
                 {
+                    if(SelektovaniGarnizon_lijevi == null)
+                    {
+                        MessageBox.Show("Oba garnizona moraju biti selektovana!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
 
-                    SelektovaniGarnizon_desni.jedinice.Remove(jedinica);
-                    SelektovaniGarnizon_lijevi.jedinice.Add(jedinica);
+                        SelektovaniGarnizon_desni.jedinice.Remove(jedinica);
+                        SelektovaniGarnizon_lijevi.jedinice.Add(jedinica);
+
+                    }
                     
                 }
 
