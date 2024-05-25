@@ -24,6 +24,7 @@
     <None Remove="images\kragujevac_garnizon.jpg" />
     <None Remove="images\kraljevo_garnizon.jpg" />
     <None Remove="images\log_bataljon.jpg" />
+    <None Remove="images\mapa_srbije.jpg" />
     <None Remove="images\nis_garnizon.jpg" />
     <None Remove="images\novisad_garnizon.jpg" />
     <None Remove="images\pancevo.jpg" />
@@ -58,6 +59,7 @@
     <Resource Include="images\kragujevac_garnizon.jpg" />
     <Resource Include="images\kraljevo_garnizon.jpg" />
     <Resource Include="images\log_bataljon.jpg" />
+    <Resource Include="images\mapa_srbije.jpg" />
     <Resource Include="images\nis_garnizon.jpg" />
     <Resource Include="images\novisad_garnizon.jpg" />
     <Resource Include="images\pancevo_garnizon.jpg" />
