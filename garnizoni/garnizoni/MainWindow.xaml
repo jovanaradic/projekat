@@ -202,8 +202,8 @@
                             <RowDefinition Height="6*"/>
                         </Grid.RowDefinitions>
                         <Label Content="Prikaz svih garnizona: " FontWeight="DemiBold" Margin="10 5 10 0" Padding="3"></Label>
-
-                        <ListView  Grid.Column="0" x:Name="lwGarnizoniTab3" Margin="10 5 5 20" Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding garnizoni}" AllowDrop="True" DragEnter="lw_DragEnter"  MouseMove="lw_MouseMove" PreviewMouseLeftButtonDown="lw_PreviewMouseLeftButtonDown" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="lwGarnizoniTab3_SelectionChanged">
+                        <ListView  Grid.Column="0" x:Name="lwGarnizoniTab3" Margin="10 5 5 20" Grid.Row="1" SelectionMode="Single" ItemsSource="{Binding garnizoni}"
+                                   AllowDrop="True" DragEnter="lw_DragEnter"  MouseMove="lw_MouseMove" PreviewMouseLeftButtonDown="lw_PreviewMouseLeftButtonDown" ScrollViewer.VerticalScrollBarVisibility="Visible" SelectionChanged="lwGarnizoniTab3_SelectionChanged">
 
                             <ListView.View>
                                 <GridView>
@@ -232,8 +232,8 @@
                         </Grid.RowDefinitions>
                         <Label Content="Prikaz jedinica selektovanog garnizona: " FontWeight="DemiBold" Margin="10 5 5 0" Padding="3"></Label>
 
-                       
-                        <ListView  Grid.Column="0" x:Name="lwJediniceTab3" Margin="10 5 5 20" Grid.Row="1" SelectionMode="Single" AllowDrop="True" DragEnter="lw_DragEnter" MouseMove="lw_MouseMove" PreviewMouseLeftButtonDown="lw_PreviewMouseLeftButtonDown" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListView  Grid.Column="0" x:Name="lwJediniceTab3" Margin="10 5 5 20" Grid.Row="1" SelectionMode="Single" AllowDrop="True" DragEnter="lw_DragEnter"
+                                   MouseMove="lw_MouseMove" PreviewMouseLeftButtonDown="lw_PreviewMouseLeftButtonDown" ScrollViewer.VerticalScrollBarVisibility="Visible">
 
                             <ListView.View>
                                 <GridView>

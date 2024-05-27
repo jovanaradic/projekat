@@ -55,17 +55,21 @@ namespace garnizoni
             Jedinica j = new Jedinica();
             if(tbNaziv.Text != null && tbAdresa.Text != null && slikaJedinice.Source != null)
             {
-                    foreach(var ja in garnizon.jedinice)
+                    foreach(var ga in garnizoni)
                     {
-                        if(ja.Naziv == tbNaziv.Text)
+                        foreach (var ja in ga.jedinice)
                         {
-                            MessageBox.Show("Vec postoji jedinica sa tim nazivom!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
+
+                            if (ja.Naziv == tbNaziv.Text)
+                            {
+                                MessageBox.Show("Vec postoji jedinica sa tim nazivom!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                                return;
+                            }
                         }
                     }
                     j.Naziv = tbNaziv.Text;
                     j.Adresa = tbAdresa.Text;
-                    j.Putanja = (slikaJedinice.Source as BitmapImage)?.UriSource.AbsolutePath;
+                    j.Putanja = (slikaJedinice.Source as BitmapImage)?.UriSource.OriginalString;
                     garnizon.jedinice.Add(j);
                     MessageBox.Show("Uspjesno dodavanje nove jedinice!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();

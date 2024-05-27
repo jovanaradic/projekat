@@ -68,7 +68,7 @@ namespace garnizoni
                     g.Id = id;
                     g.Naziv = tbNaziv.Text;
                     g.Adresa = tbAdresa.Text;
-                    g.Putanja = (slikaGarnizona.Source as BitmapImage)?.UriSource.AbsolutePath;
+                    g.Putanja = (slikaGarnizona.Source as BitmapImage)?.UriSource.OriginalString;
                     garnizoni.Add(g);
                     MessageBox.Show("Uspjesno dodavanje novog garnizona!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
