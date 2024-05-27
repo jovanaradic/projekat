@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="images\2_Brigada_KOV.jpg" />
     <None Remove="images\3_Brigada_KOV.jpg" />
+    <None Remove="images\4_Brigada.jpg" />
     <None Remove="images\4_Brigada_KOV,jpg" />
     <None Remove="images\63_padobranska_brigada.jpg" />
     <None Remove="images\72_brigada.jpg" />
@@ -19,8 +20,10 @@
     <None Remove="images\garda.jpg" />
     <None Remove="images\Generalstab.jpg" />
     <None Remove="images\helikopterska.jpg" />
+    <None Remove="images\helikopterska.png" />
     <None Remove="images\inzenjerska.jpg" />
     <None Remove="images\Kopnena_vojska.jpg" />
+    <None Remove="images\Kopnena_vojska.png" />
     <None Remove="images\kragujevac_garnizon.jpg" />
     <None Remove="images\kraljevo_garnizon.jpg" />
     <None Remove="images\log_bataljon.jpg" />
@@ -48,6 +51,7 @@
   <ItemGroup>
     <Resource Include="images\2_Brigada_KOV.jpg" />
     <Resource Include="images\3_Brigada_KOV.jpg" />
+    <Resource Include="images\4_Brigada.jpg" />
     <Resource Include="images\63_padobranska_brigada.jpg" />
     <Resource Include="images\72_brigada.jpg" />
     <Resource Include="images\beograd_garnizon.jpg" />
@@ -55,7 +59,9 @@
     <Resource Include="images\garda.jpg" />
     <Resource Include="images\Generalstab.jpg" />
     <Resource Include="images\helikopterska.jpg" />
+    <Resource Include="images\helikopterska.png" />
     <Resource Include="images\inzenjerska.jpg" />
+    <Resource Include="images\Kopnena_vojska.png" />
     <Resource Include="images\kragujevac_garnizon.jpg" />
     <Resource Include="images\kraljevo_garnizon.jpg" />
     <Resource Include="images\log_bataljon.jpg" />

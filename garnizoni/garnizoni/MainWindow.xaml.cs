@@ -22,6 +22,7 @@ namespace garnizoni
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         Point startPoint = new Point();
+        Point dropPosition = new Point();
 
         public ObservableCollection<Garnizon> garnizoni { get; set; }
 
@@ -449,6 +450,50 @@ namespace garnizoni
                 Garnizon g = lwGarnizoniTab3.SelectedItem as Garnizon;
                 lwJediniceTab3.ItemsSource = g.jedinice;
             }
+        }
+
+
+        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            startPoint = e.GetPosition(null);
+        }
+
+
+        private void ListView_MouseMove(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void ListView_DragEnter(object sender, DragEventArgs e)
+        {
+            
+        }
+        private void ListView_Drop(object sender, DragEventArgs e)
+        {
+           
+        }
+
+
+        private void slikaCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void slikaCanvas_Drop(object sender, DragEventArgs e)
+        {
+            
+           
+        }
+
+        private void DodajIkonicuNaMapu(object item, Point position)
+        {
+            
+
+        }
+
+        private void slikaCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+           
         }
     }
 }
