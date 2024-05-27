@@ -23,12 +23,10 @@ namespace garnizoni
     {
         Point startPoint = new Point();
 
-        Point dropPosition = new Point();
-
         Point startPoint3 = new Point();
         private List<int> garnizoniNaCanvasu;
         private List<string> jediniceNaCanvasu;
-
+        private Garnizon selektovaniGarnizonTab3;
 
         public ObservableCollection<Garnizon> garnizoni { get; set; }
 
@@ -462,6 +460,7 @@ namespace garnizoni
             {
                 Garnizon g = lwGarnizoniTab3.SelectedItem as Garnizon;
                 lwJediniceTab3.ItemsSource = g.jedinice;
+                selektovaniGarnizonTab3 = g;
             }
         }
 
@@ -606,7 +605,10 @@ namespace garnizoni
                         slikaCanvas.Children.Remove(ikonica);
                         garnizoniNaCanvasu.Remove(garnizon.Id);
                         var itemsSource = lwJediniceTab3.ItemsSource;
-                        lwJediniceTab3.ItemsSource = null;
+                        if(selektovaniGarnizonTab3 == garnizon)
+                        {
+                            lwJediniceTab3.ItemsSource = null;
+                        }
                         foreach (Garnizon g in garnizoni)
                         {
                             if(g.Naziv == "SAMOSTALAN")
