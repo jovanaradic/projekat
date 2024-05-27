@@ -326,6 +326,7 @@ namespace garnizoni
             {
                 WindowEdit1 windowEdit1 = new WindowEdit1(garnizoni, SelektovaniGarnizon);
                 windowEdit1.ShowDialog();
+                lvSelektovanaJedinica.Items.Clear();
             }
             else
             {
@@ -517,23 +518,24 @@ namespace garnizoni
             {
                 e.Effects = DragDropEffects.None;
             }
-            if(e.Data.GetDataPresent("garnizonFormat"))
+            else
             {
-                Garnizon garnizon = e.Data.GetData("garnizonFormat") as Garnizon;
-                if(garnizoniNaCanvasu.Contains(garnizon.Id))
+                if (e.Data.GetDataPresent("garnizonFormat"))
                 {
-                    e.Effects = DragDropEffects.None;
-                    return;
+                    Garnizon garnizon = e.Data.GetData("garnizonFormat") as Garnizon;
+                    if (garnizoniNaCanvasu.Contains(garnizon.Id))
+                    {
+                        e.Effects = DragDropEffects.None;
+                    }
                 }
-            }
-            else if(e.Data.GetDataPresent("jedinicaFormat"))
-            {
-                Jedinica jedinica = e.Data.GetData("jedinicaFormat") as Jedinica;
-
-                if (jediniceNaCanvasu.Contains(jedinica.Naziv))
+                else if (e.Data.GetDataPresent("jedinicaFormat"))
                 {
-                    e.Effects = DragDropEffects.None;
-                    return;
+                    Jedinica jedinica = e.Data.GetData("jedinicaFormat") as Jedinica;
+
+                    if (jediniceNaCanvasu.Contains(jedinica.Naziv))
+                    {
+                        e.Effects = DragDropEffects.None;
+                    }
                 }
             }
         }
@@ -552,12 +554,12 @@ namespace garnizoni
 
                 if (listViewItem == null) return;
 
-                if (listViewItem.Content is Garnizon garnizon)
+                if (listViewItem.Content is Garnizon garnizon && !garnizoniNaCanvasu.Contains(garnizon.Id))
                 {
                     DataObject dragData = new DataObject("garnizonFormat", garnizon);
                     DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
                 }
-                else if (listViewItem.Content is Jedinica jedinica)
+                else if (listViewItem.Content is Jedinica jedinica && !jediniceNaCanvasu.Contains(jedinica.Naziv))
                 {
                     DataObject dragData = new DataObject("jedinicaFormat", jedinica);
                     DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
@@ -603,16 +605,28 @@ namespace garnizoni
                         garnizoni.Remove(garnizon);
                         slikaCanvas.Children.Remove(ikonica);
                         garnizoniNaCanvasu.Remove(garnizon.Id);
+                        var itemsSource = lwJediniceTab3.ItemsSource;
+                        lwJediniceTab3.ItemsSource = null;
+                        foreach (Garnizon g in garnizoni)
+                        {
+                            if(g.Naziv == "SAMOSTALAN")
+                            {
+                                foreach(Jedinica j in garnizon.jedinice)
+                                {
+                                    g.jedinice.Add(j);
+                                }
+                            }
+                        }
                     }
                     else if(ikonica.Tag is Jedinica jedinica)
-                    {
+                    { 
+                        slikaCanvas.Children.Remove(ikonica);
+                        jediniceNaCanvasu.Remove(jedinica.Naziv);
                         foreach (var g in garnizoni)
                         {
                             if(g.jedinice.Contains(jedinica))
                             {
                                 g.jedinice.Remove(jedinica);
-                                slikaCanvas.Children.Remove(ikonica);
-                                jediniceNaCanvasu.Remove(jedinica.Naziv);
                             }
                         }
                     }

@@ -59,7 +59,6 @@
     <Resource Include="images\garda.jpg" />
     <Resource Include="images\Generalstab.jpg" />
     <Resource Include="images\helikopterska.jpg" />
-    <Resource Include="images\helikopterska.png" />
     <Resource Include="images\inzenjerska.jpg" />
     <Resource Include="images\Kopnena_vojska.png" />
     <Resource Include="images\kragujevac_garnizon.jpg" />
@@ -79,7 +78,6 @@
     <Resource Include="images\vma.jpg" />
     <Resource Include="images\vojna_akademija.jpg" />
     <Resource Include="images\vojna_policija.jpg" />
-    <Resource Include="images\vojska.jpg" />
     <Resource Include="images\vranje_garnizon.jpg" />
     <Resource Include="images\zajecar_garnizon.jpg" />
     <Resource Include="images\znacka-komande-ratnog-vazduhoplovstva-i-pvo.jpg" />
