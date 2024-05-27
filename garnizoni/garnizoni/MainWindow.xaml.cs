@@ -22,7 +22,13 @@ namespace garnizoni
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         Point startPoint = new Point();
+
         Point dropPosition = new Point();
+
+        Point startPoint3 = new Point();
+        private List<int> garnizoniNaCanvasu;
+        private List<string> jediniceNaCanvasu;
+
 
         public ObservableCollection<Garnizon> garnizoni { get; set; }
 
@@ -82,9 +88,11 @@ namespace garnizoni
             garnizoni = new ObservableCollection<Garnizon>();
             ucitajGarnizone("garnizoni.txt", garnizoni);
             ucitajJedinice("jedinice.txt", garnizoni);
+            garnizoniNaCanvasu = new List<int>();
+            jediniceNaCanvasu = new List<string>();
 
 
-        }
+    }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -453,47 +461,170 @@ namespace garnizoni
         }
 
 
-        private void ListView_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            startPoint = e.GetPosition(null);
-        }
-
-
-        private void ListView_MouseMove(object sender, MouseEventArgs e)
-        {
-            
-        }
-
-        private void ListView_DragEnter(object sender, DragEventArgs e)
-        {
-            
-        }
-        private void ListView_Drop(object sender, DragEventArgs e)
-        {
-           
-        }
-
-
-        private void slikaCanvas_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
 
         private void slikaCanvas_Drop(object sender, DragEventArgs e)
         {
-            
-           
+            Point dropPosition = e.GetPosition(slikaCanvas);
+            if (dropPosition != null)
+            {
+                if (e.Data.GetDataPresent("garnizonFormat"))
+                {
+                    Garnizon garnizon = e.Data.GetData("garnizonFormat") as Garnizon;
+                    
+                    Image ikonica = new Image
+                    {
+                        Source = new BitmapImage(new Uri((garnizon is Garnizon g) ? g.Putanja : ((Garnizon)garnizon).Putanja, UriKind.Relative)),
+                        Width = 30,
+                        Height = 30
+                    };
+
+                    // Postavljanje slike na određene koordinate u Canvas-u
+                    Canvas.SetLeft(ikonica, dropPosition.X);
+                    Canvas.SetTop(ikonica, dropPosition.Y);
+
+                    slikaCanvas.Children.Add(ikonica);
+                    ikonica.Tag = garnizon;
+                    garnizoniNaCanvasu.Add(garnizon.Id);
+                }
+                else if (e.Data.GetDataPresent("jedinicaFormat"))
+                {
+                    Jedinica jedinica = e.Data.GetData("jedinicaFormat") as Jedinica;
+                    Image ikonica = new Image
+                    {
+                        Source = new BitmapImage(new Uri((jedinica is Jedinica j) ? j.Putanja : ((Jedinica)jedinica).Putanja, UriKind.Relative)),
+                        Width = 30,
+                        Height = 30
+                    };
+
+                    // Postavljanje slike na određene koordinate u Canvas-u
+                    Canvas.SetLeft(ikonica, dropPosition.X);
+                    Canvas.SetTop(ikonica, dropPosition.Y);
+
+                    slikaCanvas.Children.Add(ikonica);
+                    ikonica.Tag = jedinica;
+                    jediniceNaCanvasu.Add(jedinica.Naziv);
+                }
+            }
         }
 
-        private void DodajIkonicuNaMapu(object item, Point position)
+        private void lw_DragEnter(object sender, DragEventArgs e)
         {
-            
+            if (!e.Data.GetDataPresent("garnizonFormat") && !e.Data.GetDataPresent("jedinicaFormat"))
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            if(e.Data.GetDataPresent("garnizonFormat"))
+            {
+                Garnizon garnizon = e.Data.GetData("garnizonFormat") as Garnizon;
+                if(garnizoniNaCanvasu.Contains(garnizon.Id))
+                {
+                    e.Effects = DragDropEffects.None;
+                    return;
+                }
+            }
+            else if(e.Data.GetDataPresent("jedinicaFormat"))
+            {
+                Jedinica jedinica = e.Data.GetData("jedinicaFormat") as Jedinica;
 
+                if (jediniceNaCanvasu.Contains(jedinica.Naziv))
+                {
+                    e.Effects = DragDropEffects.None;
+                    return;
+                }
+            }
         }
 
-        private void slikaCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        private void lw_MouseMove(object sender, MouseEventArgs e)
         {
-           
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint3 - mousePos;
+
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                ListView listView = sender as ListView;
+                ListViewItem listViewItem = FindAnchestor<ListViewItem>((DependencyObject)e.OriginalSource);
+
+                if (listViewItem == null) return;
+
+                if (listViewItem.Content is Garnizon garnizon)
+                {
+                    DataObject dragData = new DataObject("garnizonFormat", garnizon);
+                    DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
+                }
+                else if (listViewItem.Content is Jedinica jedinica)
+                {
+                    DataObject dragData = new DataObject("jedinicaFormat", jedinica);
+                    DragDrop.DoDragDrop(listViewItem, dragData, DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void lw_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            startPoint3 = e.GetPosition(null);
+        }
+
+        private void slikaCanvas_ContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            DependencyObject izvor = (DependencyObject)e.OriginalSource;
+            if(izvor is Image ikonica)
+            {
+                ContextMenu meni = new ContextMenu();
+
+                MenuItem ukloniSaCanvasa = new MenuItem();
+                ukloniSaCanvasa.Header = "Izbrisi sa mape";
+                ukloniSaCanvasa.Click += (sender, args) =>
+                {
+                    slikaCanvas.Children.Remove(ikonica);
+                    if(ikonica.Tag is Garnizon garnizon)
+                    {
+                        garnizoniNaCanvasu.Remove(garnizon.Id);
+                    }
+                    if(ikonica.Tag is Jedinica jedinica)
+                    {
+                        jediniceNaCanvasu.Remove(jedinica.Naziv); 
+                    }
+                    
+                };
+                meni.Items.Add(ukloniSaCanvasa);
+
+                MenuItem ukloni = new MenuItem();
+                ukloni.Header = "Izbrisi";
+                ukloni.Click += (sender, args) =>
+                {
+                    if (ikonica.Tag is Garnizon garnizon)
+                    {
+                        garnizoni.Remove(garnizon);
+                        slikaCanvas.Children.Remove(ikonica);
+                        garnizoniNaCanvasu.Remove(garnizon.Id);
+                    }
+                    else if(ikonica.Tag is Jedinica jedinica)
+                    {
+                        foreach (var g in garnizoni)
+                        {
+                            foreach(var j in g.jedinice)
+                            {
+                                if(j == jedinica)
+                                {
+                                    g.jedinice.Remove(jedinica);
+                                    slikaCanvas.Children.Remove(ikonica);
+                                    jediniceNaCanvasu.Remove(jedinica.Naziv);
+                                }
+                            }
+                        }
+                    }
+                };
+                meni.Items.Add(ukloni);
+
+                ContextMenuService.SetContextMenu(ikonica, meni);
+            }
+            else
+            {
+                ((FrameworkElement)sender).ContextMenu = null;
+            }
+            
         }
     }
 }
