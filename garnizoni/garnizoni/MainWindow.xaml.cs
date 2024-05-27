@@ -22,9 +22,13 @@ namespace garnizoni
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
         Point startPoint = new Point();
+
+        Point dropPosition = new Point();
+
         Point startPoint3 = new Point();
         private List<int> garnizoniNaCanvasu;
         private List<string> jediniceNaCanvasu;
+
 
         public ObservableCollection<Garnizon> garnizoni { get; set; }
 
@@ -455,6 +459,7 @@ namespace garnizoni
                 lwJediniceTab3.ItemsSource = g.jedinice;
             }
         }
+
 
 
         private void slikaCanvas_Drop(object sender, DragEventArgs e)
