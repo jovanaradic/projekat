@@ -34,7 +34,7 @@ namespace garnizoni
             tbNaziv.Text = garnizon.Naziv.ToString();
             tbAdresa.Text = garnizon.Adresa.ToString();
             string putanja = garnizon.Putanja.ToString();
-            slikaGarnizona.Source = new BitmapImage(new Uri(@putanja, UriKind.Relative));
+            slikaGarnizona.Source = new BitmapImage(new Uri((garnizon is Garnizon ga) ? ga.Putanja : ((Garnizon)garnizon).Putanja, UriKind.RelativeOrAbsolute));
         }
 
         private void Browse_Click(object sender, RoutedEventArgs e)
@@ -72,12 +72,15 @@ namespace garnizoni
                             return;
                         }
                     }
-                    garnizon.Id = id;
-                    garnizon.Naziv = tbNaziv.Text;
-                    garnizon.Adresa = tbAdresa.Text;
-                    garnizon.Putanja = (slikaGarnizona.Source as BitmapImage)?.UriSource.AbsolutePath;
-                    garnizoni.Add(garnizon);
-                    MessageBox.Show("Uspjesno dodavanje novog garnizona!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Garnizon izmijenjen = new Garnizon();
+                    izmijenjen.Id = id;
+                    izmijenjen.Naziv = tbNaziv.Text;
+                    izmijenjen.Adresa = tbAdresa.Text;
+                    izmijenjen.Putanja = (slikaGarnizona.Source as BitmapImage)?.UriSource.OriginalString;
+                    izmijenjen.jedinice = garnizon.jedinice;
+                    garnizoni.Add(izmijenjen);
+                    garnizoni.Remove(garnizon);
+                    MessageBox.Show("Uspjesno izmijena garnizona!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close();
                 }
                 else
@@ -87,7 +90,7 @@ namespace garnizoni
             }
             else
             {
-                MessageBox.Show("Morate da popunite sva polja prije dodavanja!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Morate da popunite sva polja prije izmjene!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
         }

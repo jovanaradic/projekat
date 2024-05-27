@@ -379,8 +379,12 @@ namespace garnizoni
             Jedinica j = lvJedinice.SelectedItem as Jedinica;
             if (j != null)
             {
-                WindowEdit2 windowEdit2 = new WindowEdit2(garnizoni, SelektovaniGarnizon);
+                WindowEdit2 windowEdit2 = new WindowEdit2(garnizoni, SelektovaniGarnizon, j);
                 windowEdit2.ShowDialog();
+                if(!lvJedinice.Items.Contains(j))
+                {
+                    lvSelektovanaJedinica.Items.Remove(j);
+                }
             }
             else
             {
@@ -468,7 +472,7 @@ namespace garnizoni
                     
                     Image ikonica = new Image
                     {
-                        Source = new BitmapImage(new Uri((garnizon is Garnizon g) ? g.Putanja : ((Garnizon)garnizon).Putanja, UriKind.Relative)),
+                        Source = new BitmapImage(new Uri((garnizon is Garnizon g) ? g.Putanja : ((Garnizon)garnizon).Putanja, UriKind.RelativeOrAbsolute)),
                         Width = 30,
                         Height = 30
                     };
@@ -486,7 +490,7 @@ namespace garnizoni
                     Jedinica jedinica = e.Data.GetData("jedinicaFormat") as Jedinica;
                     Image ikonica = new Image
                     {
-                        Source = new BitmapImage(new Uri((jedinica is Jedinica j) ? j.Putanja : ((Jedinica)jedinica).Putanja, UriKind.Relative)),
+                        Source = new BitmapImage(new Uri((jedinica is Jedinica j) ? j.Putanja : ((Jedinica)jedinica).Putanja, UriKind.RelativeOrAbsolute)),
                         Width = 30,
                         Height = 30
                     };
@@ -579,7 +583,7 @@ namespace garnizoni
                     }
                     if(ikonica.Tag is Jedinica jedinica)
                     {
-                        jediniceNaCanvasu.Remove(jedinica.Naziv); 
+                        jediniceNaCanvasu.Remove(jedinica.Naziv);
                     }
                     
                 };
@@ -599,14 +603,11 @@ namespace garnizoni
                     {
                         foreach (var g in garnizoni)
                         {
-                            foreach(var j in g.jedinice)
+                            if(g.jedinice.Contains(jedinica))
                             {
-                                if(j == jedinica)
-                                {
-                                    g.jedinice.Remove(jedinica);
-                                    slikaCanvas.Children.Remove(ikonica);
-                                    jediniceNaCanvasu.Remove(jedinica.Naziv);
-                                }
+                                g.jedinice.Remove(jedinica);
+                                slikaCanvas.Children.Remove(ikonica);
+                                jediniceNaCanvasu.Remove(jedinica.Naziv);
                             }
                         }
                     }

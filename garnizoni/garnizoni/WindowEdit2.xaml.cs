@@ -23,14 +23,19 @@ namespace garnizoni
     {
         private ObservableCollection<Garnizon> garnizoni;
         private Garnizon garnizon;
+        private Jedinica jedinica;
 
-        public WindowEdit2(ObservableCollection<Garnizon> Garnizoni, Garnizon g)
+        public WindowEdit2(ObservableCollection<Garnizon> Garnizoni, Garnizon g, Jedinica j)
         {
             InitializeComponent();
             garnizoni = Garnizoni;
+            garnizon = g;
+            jedinica = j;
 
-
-
+            tbNaziv.Text = jedinica.Naziv.ToString();
+            tbAdresa.Text = jedinica.Adresa.ToString();
+            string putanja = jedinica.Putanja.ToString();
+            slikaJedinice.Source = new BitmapImage(new Uri((jedinica is Jedinica je) ? je.Putanja : ((Jedinica)jedinica).Putanja, UriKind.RelativeOrAbsolute));
         }
 
         private void Browse_Click(object sender, RoutedEventArgs e)
@@ -55,7 +60,33 @@ namespace garnizoni
 
         private void Izmijeni_Click(object sender, RoutedEventArgs e)
         {
+            if (tbNaziv.Text != null && tbAdresa.Text != null && slikaJedinice.Source != null)
+            {
+                foreach (var ga in garnizoni)
+                {
+                    foreach(var je in ga.jedinice)
+                    {
 
+                        if (je.Naziv == tbNaziv.Text && je.Naziv != jedinica.Naziv)
+                        {
+                            MessageBox.Show("Vec postoji jedinica sa tim nazivom!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+                    }
+                }
+                Jedinica j = new Jedinica();
+                j.Naziv = tbNaziv.Text;
+                j.Adresa = tbAdresa.Text;
+                j.Putanja = (slikaJedinice.Source as BitmapImage)?.UriSource.OriginalString;
+                garnizon.jedinice.Add(j);
+                garnizon.jedinice.Remove(jedinica);
+                MessageBox.Show("Uspjesna izmjena jedinice!", "Uspjesna validacija!", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Morate da popunite sva polja prije izmjene!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Zatvori_Click(object sender, RoutedEventArgs e)
